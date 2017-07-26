@@ -11,7 +11,7 @@ client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 # 连接主机
 client.connect((target_host,target_port))
 
-FILEPATH = './TempSend/file.txt'
+FILEPATH = './TempSend/pic.png'
 FileInfo_size = struct.calcsize('128sl')
 fhead = struct.pack('128sl',os.path.basename(FILEPATH),os.stat(FILEPATH).st_size)
 client.send(fhead)

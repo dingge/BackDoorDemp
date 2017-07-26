@@ -29,7 +29,7 @@ mem_dc.SelectObject(screenshot)
 mem_dc.BitBlt((0, 0), (width, height), img_dc, (left, top), win32con.SRCCOPY)
   
 # 将截图保存到文件中
-screenshot.SaveBitmapFile(mem_dc, 'c:\\WINDOWS\\Temp\\screenshot.bmp')
+screenshot.SaveBitmapFile(mem_dc, './TempSend/screenshot.bmp')
   
 # 内存释放
 mem_dc.DeleteDC()

